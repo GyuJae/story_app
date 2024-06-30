@@ -12,7 +12,6 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
     final user = UserModel(
       id: "1",
       email: params.email,
-      name: params.name,
     );
 
     return Future.value(Right(user));

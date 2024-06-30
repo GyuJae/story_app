@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:story_app/config/routes.dart';
 import 'package:story_app/config/themes.dart';
 import 'package:story_app/injection_container.dart';
@@ -6,7 +7,11 @@ import 'package:story_app/injection_container.dart';
 void main() async {
   await initializeDependencies();
 
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -19,6 +24,7 @@ class MyApp extends StatelessWidget {
       routerConfig: router,
       theme: lightTheme,
       darkTheme: darkTheme,
+      themeMode: ThemeMode.system,
     );
   }
 }

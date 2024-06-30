@@ -40,6 +40,7 @@ dependencies:
   flutter_riverpod: ^2.5.1
   equatable: ^2.0.5
   dartz: ^0.10.1
+  gap: ^3.0.1
 
 dev_dependencies:
   flutter_test:

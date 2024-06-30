@@ -4,7 +4,6 @@ class UserModel extends UserEntity {
   const UserModel({
     required super.id,
     required super.email,
-    required super.name,
     super.photoUrl,
     super.token,
   });
@@ -13,7 +12,6 @@ class UserModel extends UserEntity {
     return UserModel(
       id: json['id'],
       email: json['email'],
-      name: json['name'],
       photoUrl: json['photoUrl'],
       token: json['token'],
     );
@@ -23,7 +21,6 @@ class UserModel extends UserEntity {
     return {
       'id': id,
       'email': email,
-      'name': name,
       'photoUrl': photoUrl,
       'token': token,
     };
