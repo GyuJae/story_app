@@ -6,7 +6,7 @@ import 'package:story_app/features/authentication/domain/usecases/login_user_wit
 import 'package:story_app/injection_container.dart';
 
 final loginUserWithEmailPasswordProvider =
-    Provider<UseCase<UserEntity, LoginUserWithEmailAndPasswordParams>>(
+    Provider<UseCase<UserEntity, AuthEmailAndPasswordParams>>(
   (ref) {
     return sl<LoginUserWithEmailPassword>();
   },

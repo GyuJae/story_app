@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:story_app/core/constants/sizes.dart';
-import 'package:story_app/features/authentication/presentations/pages/sign_up/sign_up_page.dart';
-import 'package:story_app/features/authentication/presentations/provider/login_user_with_email_password.dart';
+import 'package:story_app/features/authentication/domain/usecases/create_user_with_email_password.dart';
 import 'package:story_app/features/authentication/presentations/widgets/email_form.dart';
 
-class LoginPage extends StatelessWidget {
-  static const String routePath = '/login';
-  static const String routeName = 'Login';
+class SignUpPage extends StatelessWidget {
+  static const String routePath = '/sign-up';
+  static const String routeName = 'sign-up';
 
-  const LoginPage({super.key});
+  const SignUpPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +30,7 @@ class LoginPage extends StatelessWidget {
           children: [
             const Gap(Sizes.size36),
             const Text(
-              '로그인',
+              '회원가입',
               style: TextStyle(
                 fontSize: Sizes.size24,
                 fontWeight: FontWeight.bold,
@@ -40,9 +39,8 @@ class LoginPage extends StatelessWidget {
             ),
             const Gap(Sizes.size36),
             EmailForm(
-              emailAndPasswordProvider: loginUserWithEmailPasswordProvider,
+              emailAndPasswordProvider: createUserWithEmailAndPasswordProvider,
             ),
-            const Gap(Sizes.size14),
           ],
         ),
       ),
@@ -50,20 +48,20 @@ class LoginPage extends StatelessWidget {
   }
 
   BottomAppBar _buildBottom(BuildContext context) {
-    void onSignUpPage() {
-      context.pushNamed(SignUpPage.routeName);
+    void onLoginPage() {
+      context.pop();
     }
 
     return BottomAppBar(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text("아직 계정이 없으신가요?"),
+          const Text("이미 계정이 있으신가요?"),
           const Gap(Sizes.size6),
           GestureDetector(
-            onTap: onSignUpPage,
+            onTap: onLoginPage,
             child: Text(
-              "회원가입",
+              "로그인",
               style: TextStyle(
                 color: Theme.of(context).primaryColor,
                 fontWeight: FontWeight.bold,

@@ -2,14 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:story_app/core/constants/sizes.dart';
+import 'package:story_app/core/use_case/use_case.dart';
 import 'package:story_app/core/utils/validators.dart';
+import 'package:story_app/features/authentication/domain/entities/user.dart';
 import 'package:story_app/features/authentication/domain/repository/authentication_repository.dart';
-import 'package:story_app/features/authentication/presentations/provider/login_user_with_email_password.dart';
 
 class EmailForm extends ConsumerStatefulWidget {
   const EmailForm({
     super.key,
+    required this.emailAndPasswordProvider,
   });
+
+  final Provider<UseCase<UserEntity, AuthEmailAndPasswordParams>>
+      emailAndPasswordProvider;
 
   @override
   createState() => EmailFormState();
@@ -23,12 +28,12 @@ class EmailFormState extends ConsumerState<EmailForm> {
   void _submit() async {
     if (!_formKey.currentState!.validate()) return;
 
-    final input = LoginUserWithEmailAndPasswordParams(
+    final input = AuthEmailAndPasswordParams(
       email: _emailController.text,
       password: _passwordController.text,
     );
     final result =
-        await ref.read(loginUserWithEmailPasswordProvider).execute(input);
+        await ref.read(widget.emailAndPasswordProvider).execute(input);
 
     result.fold((error) {
       ScaffoldMessenger.of(context).showSnackBar(

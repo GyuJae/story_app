@@ -7,21 +7,21 @@ import 'package:story_app/features/authentication/domain/repository/authenticati
 import 'package:story_app/injection_container.dart';
 
 class CreateUserWithEmailPassword
-    implements UseCase<UserEntity, CreateUserWithEmailAndPasswordParams> {
+    implements UseCase<UserEntity, AuthEmailAndPasswordParams> {
   final AuthenticationRepository repository;
 
   CreateUserWithEmailPassword(this.repository);
 
   @override
   Future<Either<Failure, UserEntity>> execute(
-    CreateUserWithEmailAndPasswordParams params,
+    AuthEmailAndPasswordParams params,
   ) async {
     return repository.createUserWithEmailAndPassword(params);
   }
 }
 
 final createUserWithEmailAndPasswordProvider =
-    Provider<UseCase<UserEntity, CreateUserWithEmailAndPasswordParams>>(
+    Provider<UseCase<UserEntity, AuthEmailAndPasswordParams>>(
   (ref) {
     return sl<CreateUserWithEmailPassword>();
   },

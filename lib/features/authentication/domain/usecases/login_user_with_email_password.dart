@@ -5,14 +5,14 @@ import 'package:story_app/features/authentication/domain/entities/user.dart';
 import 'package:story_app/features/authentication/domain/repository/authentication_repository.dart';
 
 class LoginUserWithEmailPassword
-    implements UseCase<UserEntity, LoginUserWithEmailAndPasswordParams> {
+    implements UseCase<UserEntity, AuthEmailAndPasswordParams> {
   final AuthenticationRepository repository;
 
   LoginUserWithEmailPassword(this.repository);
 
   @override
   Future<Either<Failure, UserEntity>> execute(
-    LoginUserWithEmailAndPasswordParams params,
+    AuthEmailAndPasswordParams params,
   ) async {
     return repository.signInWithEmailAndPassword(params);
   }

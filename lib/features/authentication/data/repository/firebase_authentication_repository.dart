@@ -10,7 +10,7 @@ class FirebaseAuthenticationRepository implements AuthenticationRepository {
 
   @override
   Future<Either<Failure, UserEntity>> createUserWithEmailAndPassword(
-    CreateUserWithEmailAndPasswordParams params,
+    AuthEmailAndPasswordParams params,
   ) async {
     try {
       final result = await _firebaseAuth.createUserWithEmailAndPassword(
@@ -53,7 +53,7 @@ class FirebaseAuthenticationRepository implements AuthenticationRepository {
 
   @override
   Future<Either<Failure, UserEntity>> signInWithEmailAndPassword(
-    LoginUserWithEmailAndPasswordParams params,
+    AuthEmailAndPasswordParams params,
   ) async {
     try {
       final result = await _firebaseAuth.signInWithEmailAndPassword(
