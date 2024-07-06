@@ -15,7 +15,7 @@ final ThemeData lightTheme = ThemeData(
     ),
     focusedBorder: OutlineInputBorder(
       borderSide: BorderSide(
-        color: Colors.blue, // primaryColor를 설정한 색상으로 변경
+        color: Colors.blue,
         width: 2.0,
       ),
     ),
@@ -37,7 +37,7 @@ final ThemeData darkTheme = ThemeData(
     ),
     focusedBorder: const OutlineInputBorder(
       borderSide: BorderSide(
-        color: Colors.blue, // primaryColor를 설정한 색상으로 변경
+        color: Colors.blue,
         width: 2.0,
       ),
     ),
