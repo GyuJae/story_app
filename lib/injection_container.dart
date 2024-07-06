@@ -10,19 +10,19 @@ final sl = GetIt.instance;
 Future<void> initializeDependencies() async {
   sl.registerLazySingleton<CreateUserWithEmailPassword>(
     () => CreateUserWithEmailPassword(
-      sl(),
+      authRepository: sl<AuthenticationRepository>(),
     ),
   );
 
   sl.registerLazySingleton<LoginUserWithEmailPassword>(
     () => LoginUserWithEmailPassword(
-      sl(),
+      authRepository: sl<AuthenticationRepository>(),
     ),
   );
 
   sl.registerLazySingleton<GetCurrentUser>(
     () => GetCurrentUser(
-      sl(),
+      authRepository: sl<AuthenticationRepository>(),
     ),
   );
 

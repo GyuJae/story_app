@@ -5,12 +5,14 @@ import 'package:story_app/features/authentication/domain/entities/user.dart';
 import 'package:story_app/features/authentication/domain/repository/authentication_repository.dart';
 
 class GetCurrentUser implements UseCase<UserEntity, NoParams> {
-  AuthenticationRepository repository;
+  AuthenticationRepository authRepository;
 
-  GetCurrentUser(this.repository);
+  GetCurrentUser({
+    required this.authRepository,
+  });
 
   @override
   Future<Either<Failure, UserEntity>> execute(NoParams params) async {
-    return repository.getUser();
+    return authRepository.getUser();
   }
 }

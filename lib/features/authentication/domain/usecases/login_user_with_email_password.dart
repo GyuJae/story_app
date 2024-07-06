@@ -6,14 +6,16 @@ import 'package:story_app/features/authentication/domain/repository/authenticati
 
 class LoginUserWithEmailPassword
     implements UseCase<UserEntity, AuthEmailAndPasswordParams> {
-  final AuthenticationRepository repository;
+  final AuthenticationRepository authRepository;
 
-  LoginUserWithEmailPassword(this.repository);
+  LoginUserWithEmailPassword({
+    required this.authRepository,
+  });
 
   @override
   Future<Either<Failure, UserEntity>> execute(
     AuthEmailAndPasswordParams params,
   ) async {
-    return repository.signInWithEmailAndPassword(params);
+    return authRepository.signInWithEmailAndPassword(params);
   }
 }
