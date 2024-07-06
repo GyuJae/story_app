@@ -57,13 +57,6 @@ class EmailFormState extends ConsumerState<EmailForm> {
             validator: Validators.email,
             cursorColor: Theme.of(context).primaryColor,
             decoration: InputDecoration(
-              border: const OutlineInputBorder(),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Theme.of(context).primaryColor,
-                  width: Sizes.size2,
-                ),
-              ),
               hintText: '이메일',
               filled: true,
               fillColor: Theme.of(context).inputDecorationTheme.fillColor,
@@ -78,13 +71,6 @@ class EmailFormState extends ConsumerState<EmailForm> {
             obscureText: true,
             cursorColor: Theme.of(context).primaryColor,
             decoration: InputDecoration(
-              border: const OutlineInputBorder(),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Theme.of(context).primaryColor,
-                  width: Sizes.size2,
-                ),
-              ),
               hintText: '비밀번호',
               filled: true,
               fillColor: Theme.of(context).inputDecorationTheme.fillColor,
