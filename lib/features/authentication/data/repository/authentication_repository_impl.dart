@@ -5,7 +5,7 @@ import 'package:story_app/features/authentication/domain/dtos/create_user_with_e
 import 'package:story_app/features/authentication/domain/entities/user.dart';
 import 'package:story_app/features/authentication/domain/repository/authentication_repository.dart';
 
-class AuthenticationRepositoryImpl extends AuthenticationRepository {
+class AuthenticationRepositoryImpl implements AuthenticationRepository {
   @override
   Future<Either<Failure, UserEntity>> createUserWithEmailAndPassword(
       CreateUserWithEmailAndPasswordParams params) {
