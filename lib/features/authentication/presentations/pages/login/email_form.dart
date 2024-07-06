@@ -27,9 +27,10 @@ class EmailFormState extends ConsumerState<EmailForm> {
       email: _emailController.text,
       password: _passwordController.text,
     );
-    // TODO 여기서부터 시작
     final result =
         await ref.read(createUserWithEmailAndPasswordProvider).execute(input);
+
+    result.fold((error) {}, (user) {});
   }
 
   @override

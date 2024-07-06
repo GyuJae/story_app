@@ -8,6 +8,16 @@ class UserModel extends UserEntity {
     super.token,
   });
 
+  factory UserModel.createByEmail({
+    required String email,
+    required String id,
+  }) {
+    return UserModel(
+      id: id,
+      email: email,
+    );
+  }
+
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
       id: json['id'],
