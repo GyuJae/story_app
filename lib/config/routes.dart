@@ -7,8 +7,6 @@ import 'package:story_app/features/mood_tracker/presentation/pages/mood_tracker_
 
 final routerProvider = Provider(
   (ref) {
-    final userAsync = ref.watch(getCurrentUserProvider);
-
     return GoRouter(
       initialLocation: MoodTrackerHomePage.routePath,
       routes: [
@@ -27,16 +25,11 @@ final routerProvider = Provider(
           name: MoodTrackerHomePage.routeName,
           builder: (_, __) => const MoodTrackerHomePage(),
           redirect: (context, state) {
-            return userAsync.when(
-              data: (user) {
-                if (user == null) {
-                  return LoginPage.routePath;
-                }
-                return null;
-              },
-              error: (_, __) => null,
-              loading: () => null,
-            );
+            final getCurrentUser = ref.read(getCurrentUserProvider);
+            if (!getCurrentUser.isLoggedIn) {
+              return LoginPage.routePath;
+            }
+            return null;
           },
         ),
       ],
