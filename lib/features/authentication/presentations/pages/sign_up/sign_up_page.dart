@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:story_app/core/constants/sizes.dart';
-import 'package:story_app/features/authentication/domain/usecases/create_user_with_email_password.dart';
+import 'package:story_app/features/authentication/presentations/provider/create_user_with_email_password.dart';
 import 'package:story_app/features/authentication/presentations/widgets/email_form.dart';
 
 class SignUpPage extends StatelessWidget {
