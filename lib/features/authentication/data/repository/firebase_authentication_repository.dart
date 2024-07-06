@@ -32,7 +32,7 @@ class FirebaseAuthenticationRepository implements AuthenticationRepository {
   }
 
   @override
-  Future<Either<Failure, UserEntity>> getUser() async {
+  Either<Failure, UserEntity> getUser() {
     try {
       final user = _firebaseAuth.currentUser;
 

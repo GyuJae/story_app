@@ -22,14 +22,14 @@ void main() async {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp.router(
       title: 'Story App',
-      routerConfig: router,
+      routerConfig: ref.watch(routerProvider),
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: ThemeMode.system,

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:story_app/core/constants/sizes.dart';
 import 'package:story_app/core/use_case/use_case.dart';
 import 'package:story_app/core/utils/validators.dart';
 import 'package:story_app/features/authentication/domain/entities/user.dart';
 import 'package:story_app/features/authentication/domain/repository/authentication_repository.dart';
+import 'package:story_app/features/mood_tracker/presentation/pages/mood_tracker_home_page.dart';
 
 class EmailForm extends ConsumerStatefulWidget {
   const EmailForm({
@@ -44,9 +46,11 @@ class EmailFormState extends ConsumerState<EmailForm> {
     }, (user) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('로그인 성공'),
+          content: Text("로그인 성공"),
         ),
       );
+
+      context.goNamed(MoodTrackerHomePage.routeName);
     });
   }
 

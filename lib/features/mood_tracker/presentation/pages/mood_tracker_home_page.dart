@@ -6,7 +6,6 @@ import 'package:go_router/go_router.dart';
 import 'package:story_app/core/constants/sizes.dart';
 import 'package:story_app/core/use_case/use_case.dart';
 import 'package:story_app/features/authentication/presentations/pages/login/login_page.dart';
-import 'package:story_app/features/authentication/presentations/provider/get_current_user.dart';
 import 'package:story_app/features/authentication/presentations/provider/sign_out.dart';
 
 class MoodTrackerHomePage extends ConsumerWidget {
@@ -17,25 +16,12 @@ class MoodTrackerHomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userAsyncValue = ref.watch(getCurrentUserProvider);
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Mood Tracker'),
       ),
       body: Column(
         children: [
-          Center(
-            child: userAsyncValue.when(
-              data: (user) {
-                return Text('Welcome ${user?.email}');
-              },
-              loading: () => const CircularProgressIndicator(),
-              error: (error, stackTrace) {
-                return Text('Error: $error');
-              },
-            ),
-          ),
           const Gap(Sizes.size20),
           // TODO: Remove
           CupertinoButton.filled(

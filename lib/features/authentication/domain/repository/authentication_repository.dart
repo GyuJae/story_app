@@ -21,7 +21,7 @@ abstract class AuthenticationRepository {
     AuthEmailAndPasswordParams params,
   );
 
-  Future<Either<Failure, UserEntity>> getUser();
+  Either<Failure, UserEntity?> getUser();
 
   Future<Either<Failure, void>> signOut();
 }
