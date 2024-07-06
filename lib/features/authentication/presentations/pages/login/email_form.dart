@@ -29,7 +29,7 @@ class EmailFormState extends ConsumerState<EmailForm> {
     );
     // TODO 여기서부터 시작
     final result =
-        await ref.read(createUserWithEmailAndPasswordProvider).call(input);
+        await ref.read(createUserWithEmailAndPasswordProvider).execute(input);
   }
 
   @override

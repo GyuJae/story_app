@@ -14,7 +14,7 @@ class CreateUserWithEmailPassword
   CreateUserWithEmailPassword(this.repository);
 
   @override
-  Future<Either<Failure, UserEntity>> call(
+  Future<Either<Failure, UserEntity>> execute(
     CreateUserWithEmailAndPasswordParams params,
   ) async {
     return repository.createUserWithEmailAndPassword(params);
