@@ -9,7 +9,7 @@ abstract class Failure extends Equatable {
   @override
   List<Object?> get props => [message];
 
-  String getErrorMessage();
+  String getMessage();
 }
 
 class FirebaseAuthFailure extends Failure {
@@ -20,7 +20,7 @@ class FirebaseAuthFailure extends Failure {
   });
 
   @override
-  String getErrorMessage() {
+  String getMessage() {
     return firebaseAuthFailure.message;
   }
 
@@ -43,7 +43,7 @@ class UnknownFailure extends Failure {
   });
 
   @override
-  String getErrorMessage() {
+  String getMessage() {
     return message ?? '알 수 없는 오류가 발생했습니다.';
   }
 }

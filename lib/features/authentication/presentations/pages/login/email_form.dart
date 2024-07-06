@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:story_app/core/constants/sizes.dart';
 import 'package:story_app/core/utils/validators.dart';
-import 'package:story_app/features/authentication/domain/dtos/create_user_with_email_and_password.dart';
-import 'package:story_app/features/authentication/domain/usecases/create_user_with_email_password.dart';
+import 'package:story_app/features/authentication/domain/repository/authentication_repository.dart';
+import 'package:story_app/features/authentication/presentations/provider/login_user_with_email_password.dart';
 
 class EmailForm extends ConsumerStatefulWidget {
   const EmailForm({
@@ -23,14 +23,26 @@ class EmailFormState extends ConsumerState<EmailForm> {
   void _submit() async {
     if (!_formKey.currentState!.validate()) return;
 
-    final input = CreateUserWithEmailAndPasswordParams(
+    final input = LoginUserWithEmailAndPasswordParams(
       email: _emailController.text,
       password: _passwordController.text,
     );
     final result =
-        await ref.read(createUserWithEmailAndPasswordProvider).execute(input);
+        await ref.read(loginUserWithEmailPasswordProvider).execute(input);
 
-    result.fold((error) {}, (user) {});
+    result.fold((error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(error.getMessage()),
+        ),
+      );
+    }, (user) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('로그인 성공'),
+        ),
+      );
+    });
   }
 
   @override

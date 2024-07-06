@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:story_app/core/errors/failure.dart';
 import 'package:story_app/features/authentication/data/models/user.dart';
-import 'package:story_app/features/authentication/domain/dtos/create_user_with_email_and_password.dart';
 import 'package:story_app/features/authentication/domain/entities/user.dart';
 import 'package:story_app/features/authentication/domain/repository/authentication_repository.dart';
 
@@ -11,7 +10,8 @@ class FirebaseAuthenticationRepository implements AuthenticationRepository {
 
   @override
   Future<Either<Failure, UserEntity>> createUserWithEmailAndPassword(
-      CreateUserWithEmailAndPasswordParams params) async {
+    CreateUserWithEmailAndPasswordParams params,
+  ) async {
     try {
       final result = await _firebaseAuth.createUserWithEmailAndPassword(
         email: params.email,
@@ -52,14 +52,13 @@ class FirebaseAuthenticationRepository implements AuthenticationRepository {
   }
 
   @override
-  Future<Either<Failure, UserEntity>> signInWithEmailAndPassword({
-    required String email,
-    required String password,
-  }) async {
+  Future<Either<Failure, UserEntity>> signInWithEmailAndPassword(
+    LoginUserWithEmailAndPasswordParams params,
+  ) async {
     try {
       final result = await _firebaseAuth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
+        email: params.email,
+        password: params.password,
       );
 
       final user = UserModel.createByEmail(
