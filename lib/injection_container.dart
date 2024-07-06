@@ -4,6 +4,7 @@ import 'package:story_app/features/authentication/domain/repository/authenticati
 import 'package:story_app/features/authentication/domain/usecases/create_user_with_email_password.dart';
 import 'package:story_app/features/authentication/domain/usecases/get_current_user.dart';
 import 'package:story_app/features/authentication/domain/usecases/login_user_with_email_password.dart';
+import 'package:story_app/features/authentication/domain/usecases/sign_out.dart';
 
 final sl = GetIt.instance;
 
@@ -22,6 +23,12 @@ Future<void> initializeDependencies() async {
 
   sl.registerLazySingleton<GetCurrentUser>(
     () => GetCurrentUser(
+      authRepository: sl<AuthenticationRepository>(),
+    ),
+  );
+
+  sl.registerLazySingleton<SignOut>(
+    () => SignOut(
       authRepository: sl<AuthenticationRepository>(),
     ),
   );

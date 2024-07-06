@@ -8,7 +8,7 @@ enum EnumFirebaseAuthFailure implements Comparable<EnumFirebaseAuthFailure> {
   operationNotAllowed(
       code: 'operation-not-allowed', message: '이메일/비밀번호 계정이 활성화되어 있지 않습니다.'),
   weakPassword(code: 'weak-password', message: '비밀번호가 너무 약합니다.'),
-  unknown(code: 'unknown', message: '알 수 없는 오류가 발생했습니다.');
+  unknown(code: 'unknown', message: '계정에 문제가 발생했습니다. 관리자에게 문의해주세요.');
 
   const EnumFirebaseAuthFailure({
     required this.code,

@@ -27,7 +27,7 @@ class FirebaseAuthenticationRepository implements AuthenticationRepository {
     } on FirebaseAuthException catch (e) {
       return Left(FirebaseAuthFailure.ofCode(e.code));
     } catch (e) {
-      return Left(FirebaseAuthFailure.ofUnknown());
+      return const Left(UnknownFailure());
     }
   }
 
@@ -47,13 +47,13 @@ class FirebaseAuthenticationRepository implements AuthenticationRepository {
     } on FirebaseAuthException catch (e) {
       return Left(FirebaseAuthFailure.ofCode(e.code));
     } catch (e) {
-      return Left(FirebaseAuthFailure.ofUnknown());
+      return const Left(UnknownFailure());
     }
   }
 
   @override
   Future<Either<Failure, UserEntity>> signInWithEmailAndPassword(
-    AuthEmailAndPasswordParams params,
+    params,
   ) async {
     try {
       final result = await _firebaseAuth.signInWithEmailAndPassword(
@@ -70,7 +70,19 @@ class FirebaseAuthenticationRepository implements AuthenticationRepository {
     } on FirebaseAuthException catch (e) {
       return Left(FirebaseAuthFailure.ofCode(e.code));
     } catch (e) {
-      return Left(FirebaseAuthFailure.ofUnknown());
+      return const Left(UnknownFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> signOut() async {
+    try {
+      await _firebaseAuth.signOut();
+      return const Right(null);
+    } on FirebaseAuthException catch (e) {
+      return Left(FirebaseAuthFailure.ofCode(e.code));
+    } catch (e) {
+      return const Left(UnknownFailure());
     }
   }
 }

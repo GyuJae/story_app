@@ -22,4 +22,6 @@ abstract class AuthenticationRepository {
   );
 
   Future<Either<Failure, UserEntity>> getUser();
+
+  Future<Either<Failure, void>> signOut();
 }
