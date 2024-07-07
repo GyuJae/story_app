@@ -7,6 +7,7 @@ class MoodEntryModel extends MoodEntryEntity {
     required super.id,
     required super.status,
     required super.date,
+    required super.note,
   });
 
   factory MoodEntryModel.fromJson(Map<String, dynamic> json) {
@@ -14,6 +15,7 @@ class MoodEntryModel extends MoodEntryEntity {
       id: json['id'],
       status: json['status'],
       date: DateTime.parse(json['date']),
+      note: json['note'],
     );
   }
 
