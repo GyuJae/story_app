@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:story_app/features/authentication/presentations/pages/login/login_page.dart';
 import 'package:story_app/features/authentication/presentations/pages/sign_up/sign_up_page.dart';
 import 'package:story_app/features/authentication/presentations/provider/get_current_user.dart';
+import 'package:story_app/features/mood_tracker/presentation/pages/mood_tracker_detail_page.dart';
 import 'package:story_app/features/mood_tracker/presentation/pages/mood_tracker_home_page.dart';
 
 final routerProvider = Provider(
@@ -31,6 +32,13 @@ final routerProvider = Provider(
             }
             return null;
           },
+        ),
+        GoRoute(
+          path: MoodTrackerDetailPage.routePath,
+          name: MoodTrackerDetailPage.routeName,
+          builder: (_, state) => MoodTrackerDetailPage(
+            id: state.pathParameters['id'] ?? '',
+          ),
         ),
       ],
     );

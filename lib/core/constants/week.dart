@@ -1,18 +1,18 @@
 enum EnumWeek implements Comparable<EnumWeek> {
-  monday(weekIndex: 1, name: '월요일'),
-  tuesday(weekIndex: 2, name: '화요일'),
-  wednesday(weekIndex: 3, name: '수요일'),
-  thursday(weekIndex: 4, name: '목요일'),
-  friday(weekIndex: 5, name: '금요일'),
-  saturday(weekIndex: 6, name: '토요일'),
-  sunday(weekIndex: 7, name: '일요일');
+  monday(value: 1, name: '월요일'),
+  tuesday(value: 2, name: '화요일'),
+  wednesday(value: 3, name: '수요일'),
+  thursday(value: 4, name: '목요일'),
+  friday(value: 5, name: '금요일'),
+  saturday(value: 6, name: '토요일'),
+  sunday(value: 7, name: '일요일');
 
   const EnumWeek({
-    required this.weekIndex,
+    required this.value,
     required this.name,
   });
 
-  final int weekIndex;
+  final int value;
   final String name;
 
   String getShortName() {
@@ -20,5 +20,5 @@ enum EnumWeek implements Comparable<EnumWeek> {
   }
 
   @override
-  int compareTo(EnumWeek other) => weekIndex.compareTo(other.weekIndex);
+  int compareTo(EnumWeek other) => value.compareTo(other.value);
 }
