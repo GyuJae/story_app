@@ -18,7 +18,7 @@ class MoodTrackerCalendar extends ConsumerWidget {
 
     return Column(
       children: [
-        _buildHeader(selectedMonth.displayFormatted()),
+        _buildHeader(selectedMonth, ref),
         const Gap(Sizes.size16),
         Expanded(
           child: _buildCalendar(context, selectedMonth),
@@ -84,13 +84,13 @@ class MoodTrackerCalendar extends ConsumerWidget {
     );
   }
 
-  Row _buildHeader(String displayMonth) {
+  Row _buildHeader(SelectedMonth selectedMonth, WidgetRef ref) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          displayMonth,
+          selectedMonth.displayFormatted(),
           style: const TextStyle(
             fontSize: Sizes.size18,
             fontWeight: FontWeight.w500,
@@ -99,7 +99,9 @@ class MoodTrackerCalendar extends ConsumerWidget {
         Row(
           children: [
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                ref.read(selectedMonthProvider.notifier).prevMonth();
+              },
               child: Container(
                 width: Sizes.size24,
                 height: Sizes.size24,
@@ -116,7 +118,9 @@ class MoodTrackerCalendar extends ConsumerWidget {
             ),
             const Gap(Sizes.size12),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                ref.read(selectedMonthProvider.notifier).nextMonth();
+              },
               child: Container(
                 width: Sizes.size24,
                 height: Sizes.size24,

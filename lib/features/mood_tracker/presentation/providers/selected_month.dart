@@ -34,6 +34,16 @@ class SelectedMonth {
   String displayFormatted() {
     return '$month월 $year년 ';
   }
+
+  SelectedMonth updateNextMonth() {
+    if (month == 12) return SelectedMonth(month: 1, year: year + 1);
+    return SelectedMonth(month: month + 1, year: year);
+  }
+
+  SelectedMonth updatePrevMonth() {
+    if (month == 1) return SelectedMonth(month: 12, year: year - 1);
+    return SelectedMonth(month: month - 1, year: year);
+  }
 }
 
 class SelectedMonthModel extends StateNotifier<SelectedMonth> {
@@ -41,6 +51,14 @@ class SelectedMonthModel extends StateNotifier<SelectedMonth> {
 
   void selectMonth(int month, int year) {
     state = SelectedMonth(month: month, year: year);
+  }
+
+  void nextMonth() {
+    state = state.updateNextMonth();
+  }
+
+  void prevMonth() {
+    state = state.updatePrevMonth();
   }
 }
 
