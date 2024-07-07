@@ -13,9 +13,12 @@ class SignUpPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _buildBody(),
-      bottomNavigationBar: _buildBottom(context),
+    return GestureDetector(
+      onTap: FocusScope.of(context).unfocus,
+      child: Scaffold(
+        body: _buildBody(),
+        bottomNavigationBar: _buildBottom(context),
+      ),
     );
   }
 

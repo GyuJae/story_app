@@ -78,6 +78,7 @@ class EmailFormState extends ConsumerState<EmailForm> {
             controller: _emailController,
             validator: Validators.email,
             cursorColor: Theme.of(context).primaryColor,
+            keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
               hintText: '이메일',
               filled: true,
