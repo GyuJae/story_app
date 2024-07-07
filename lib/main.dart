@@ -28,6 +28,7 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       title: 'Story App',
       routerConfig: ref.watch(routerProvider),
       theme: lightTheme,
