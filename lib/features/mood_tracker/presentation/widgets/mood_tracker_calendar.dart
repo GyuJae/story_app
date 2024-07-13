@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -7,6 +5,8 @@ import 'package:gap/gap.dart';
 import 'package:story_app/core/constants/sizes.dart';
 import 'package:story_app/core/constants/week.dart';
 import 'package:story_app/features/mood_tracker/data/models/mood_entry.dart';
+import 'package:story_app/features/mood_tracker/domain/repository/mood_entry_repository.dart';
+import 'package:story_app/features/mood_tracker/presentation/providers/find_mood_entries_by_month.dart';
 import 'package:story_app/features/mood_tracker/presentation/providers/selected_month.dart';
 import 'package:story_app/features/mood_tracker/presentation/widgets/mood_tracker_calendar_item.dart';
 
@@ -18,25 +18,55 @@ class MoodTrackerCalendar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedMonth = ref.watch(selectedMonthProvider);
+    final findMoodEntriesByMonth = ref.watch(findMoodEntiresByMonthProvider);
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: Sizes.size18,
-        vertical: Sizes.size16,
+    return FutureBuilder(
+      future: findMoodEntriesByMonth.execute(
+        FindMoodEntiresByMonthInput(
+          year: selectedMonth.year,
+          month: selectedMonth.month,
+        ),
       ),
-      child: Column(
-        children: [
-          _buildHeader(selectedMonth, ref),
-          const Gap(Sizes.size16),
-          Expanded(
-            child: _buildCalendar(context, selectedMonth),
-          )
-        ],
-      ),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+
+        if (snapshot.hasError) {
+          return const Center(
+            child: Text('Error'),
+          );
+        }
+
+        final result = snapshot.data!;
+
+        return result.fold(
+          (failure) => const Center(
+            child: Text('Error'),
+          ),
+          (moodEntries) {
+            return Column(
+              children: [
+                _buildHeader(selectedMonth, ref),
+                const Gap(Sizes.size12),
+                Expanded(
+                  child: _buildCalendar(context, selectedMonth, moodEntries),
+                ),
+              ],
+            );
+          },
+        );
+      },
     );
   }
 
-  GridView _buildCalendar(BuildContext context, SelectedMonth selectedMonth) {
+  GridView _buildCalendar(
+    BuildContext context,
+    SelectedMonth selectedMonth,
+    List<MoodEntryModel> moodEntries,
+  ) {
     return GridView.builder(
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -54,32 +84,31 @@ class MoodTrackerCalendar extends ConsumerWidget {
           return _buildPrevMonthDays(
               context, selectedMonth)[index - _daysInWeek];
         } else {
-          return _buildCurrentMonthDays(context, selectedMonth)[
-              index - _daysInWeek - selectedMonth.startOfWeek()];
+          return _buildCurrentMonthDays(
+            context,
+            selectedMonth,
+            moodEntries,
+          )[index - _daysInWeek - selectedMonth.startOfWeek()];
         }
       },
     );
   }
 
   List<Widget> _buildCurrentMonthDays(
-      BuildContext context, SelectedMonth selectedMonth) {
+    BuildContext context,
+    SelectedMonth selectedMonth,
+    List<MoodEntryModel> moodEntries,
+  ) {
     return List.generate(
       selectedMonth.endOfMonth(),
       (index) {
         final day = index + 1;
-        final random = Random().nextInt(5) + 1;
+        final moodEntryModel = moodEntries.where((element) {
+          return element.day == day;
+        }).firstOrNull;
         return MoodTrackerCalendarItem(
           day: day,
-          // TODO change fetch data
-          moodEntryModel: MoodEntryModel.fromJson(
-            {
-              'id': "1",
-              'status': random,
-              'year': 2024,
-              'month': 7,
-              'day': day,
-            },
-          ),
+          moodEntryModel: moodEntryModel,
         );
       },
     );

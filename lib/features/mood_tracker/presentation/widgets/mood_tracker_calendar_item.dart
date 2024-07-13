@@ -11,27 +11,32 @@ class MoodTrackerCalendarItem extends StatelessWidget {
     required this.moodEntryModel,
   });
 
-  final int day; // TODO REMOVE -> change to MoodEntryEntity
-  final MoodEntryModel moodEntryModel; // TODO Nullable
+  final int day;
+  final MoodEntryModel? moodEntryModel;
 
   @override
   Widget build(BuildContext context) {
+    final bool existsMoodEntry = moodEntryModel != null;
+
     return GestureDetector(
       onTap: () {
+        if (existsMoodEntry) return;
         context.pushNamed(MoodTrackerDetailPage.routeName,
-            pathParameters: <String, String>{'id': moodEntryModel.id});
+            pathParameters: <String, String>{'id': moodEntryModel!.id});
       },
       child: Container(
         decoration: BoxDecoration(
-          color: moodEntryModel.getStatusColor(),
+          color: moodEntryModel != null
+              ? moodEntryModel!.getStatusColor()
+              : Colors.transparent,
           shape: BoxShape.circle,
         ),
         child: Center(
           child: Text(
             '$day',
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: Sizes.size16,
-              color: Colors.black,
+              color: existsMoodEntry ? Colors.black : null,
             ),
           ),
         ),

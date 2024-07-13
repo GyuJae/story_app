@@ -63,6 +63,8 @@ class SelectedMonthModel extends StateNotifier<SelectedMonth> {
 }
 
 final selectedMonthProvider =
-    StateNotifierProvider<SelectedMonthModel, SelectedMonth>((ref) {
-  return SelectedMonthModel();
-});
+    StateNotifierProvider<SelectedMonthModel, SelectedMonth>(
+  (ref) {
+    return SelectedMonthModel();
+  },
+);

@@ -43,8 +43,8 @@ Future<void> initializeDependencies() async {
     () => FirebaseMoodEntryRepository(),
   );
 
-  sl.registerLazySingleton<GetCurrentMonthMoodEntries>(
-    () => GetCurrentMonthMoodEntries(
+  sl.registerLazySingleton<GetMoodEntriesByMonth>(
+    () => GetMoodEntriesByMonth(
       moodEntryRepository: sl<MoodEntryRepository>(),
     ),
   );
