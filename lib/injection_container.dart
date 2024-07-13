@@ -8,6 +8,7 @@ import 'package:story_app/features/authentication/domain/usecases/sign_out.dart'
 import 'package:story_app/features/mood_tracker/data/repository/firebase_mood_entry_repository.dart';
 import 'package:story_app/features/mood_tracker/domain/repository/mood_entry_repository.dart';
 import 'package:story_app/features/mood_tracker/domain/usecases/get_current_month_mood_entries.dart';
+import 'package:story_app/features/mood_tracker/domain/usecases/register_today_mood.dart';
 
 final sl = GetIt.instance;
 
@@ -45,6 +46,12 @@ Future<void> initializeDependencies() async {
   sl.registerLazySingleton<GetCurrentMonthMoodEntries>(
     () => GetCurrentMonthMoodEntries(
       moodEntryRepository: sl<MoodEntryRepository>(),
+    ),
+  );
+
+  sl.registerLazySingleton<RegisterTodayMood>(
+    () => RegisterTodayMood(
+      repository: sl<MoodEntryRepository>(),
     ),
   );
 }

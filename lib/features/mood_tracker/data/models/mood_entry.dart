@@ -6,18 +6,18 @@ class MoodEntryModel extends MoodEntryEntity {
   const MoodEntryModel({
     required super.id,
     required super.status,
-    required super.date,
-    required super.note,
-    required super.yearMonth,
+    required super.year,
+    required super.month,
+    required super.day,
   });
 
   factory MoodEntryModel.fromJson(Map<String, dynamic> json) {
     return MoodEntryModel(
       id: json['id'],
       status: json['status'],
-      date: DateTime.parse(json['date']),
-      note: json['note'],
-      yearMonth: json['yearMonth'],
+      year: json['year'],
+      month: json['month'],
+      day: json['day'],
     );
   }
 
@@ -25,9 +25,9 @@ class MoodEntryModel extends MoodEntryEntity {
     return {
       'id': super.id,
       'status': super.status,
-      'date': super.date.toIso8601String(),
-      'note': super.note,
-      'yearMonth': super.yearMonth,
+      'year': super.year,
+      'month': super.month,
+      'day': super.day,
     };
   }
 

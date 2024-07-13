@@ -16,8 +16,7 @@ class FirebaseMoodEntryRepository implements MoodEntryRepository {
   ) async {
     try {
       // final snapshot = await database.ref(moodEntriesRef).once();
-
-      return const Right([]); // TODO: Implement
+      throw UnimplementedError();
     } catch (e) {
       return const Left(UnknownFailure());
     }
@@ -27,12 +26,8 @@ class FirebaseMoodEntryRepository implements MoodEntryRepository {
   Future<Either<Failure, MoodEntryModel>> add(
       MoodEntryModel moodEntryModel) async {
     try {
-      final result =
-          await db.collection(moodEntriesRef).add(moodEntryModel.toJson());
-
-      print("result id: $result");
-
-      return Right(MoodEntryModel.fromJson(const {}));
+      await db.collection(moodEntriesRef).add(moodEntryModel.toJson());
+      return Right(moodEntryModel);
     } catch (e) {
       return const Left(UnknownFailure());
     }
