@@ -70,7 +70,8 @@ class MoodTrackerCalendar extends ConsumerWidget {
               'id': "1",
               'status': random,
               'date': '2022-01-01',
-              'note': "오늘은 그냥 기분이 더럽다."
+              'note': "오늘은 그냥 기분이 더럽다.",
+              "yearMonth": "2024-07",
             },
           ),
         );

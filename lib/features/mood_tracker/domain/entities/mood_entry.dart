@@ -5,12 +5,14 @@ class MoodEntryEntity extends Equatable {
   final int status;
   final DateTime date;
   final String note;
+  final String yearMonth;
 
   const MoodEntryEntity({
     required this.id,
     required this.status,
     required this.date,
     required this.note,
+    required this.yearMonth,
   });
 
   @override

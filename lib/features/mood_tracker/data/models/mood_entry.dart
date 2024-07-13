@@ -8,6 +8,7 @@ class MoodEntryModel extends MoodEntryEntity {
     required super.status,
     required super.date,
     required super.note,
+    required super.yearMonth,
   });
 
   factory MoodEntryModel.fromJson(Map<String, dynamic> json) {
@@ -16,7 +17,18 @@ class MoodEntryModel extends MoodEntryEntity {
       status: json['status'],
       date: DateTime.parse(json['date']),
       note: json['note'],
+      yearMonth: json['yearMonth'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': super.id,
+      'status': super.status,
+      'date': super.date.toIso8601String(),
+      'note': super.note,
+      'yearMonth': super.yearMonth,
+    };
   }
 
   Color getStatusColor() {
