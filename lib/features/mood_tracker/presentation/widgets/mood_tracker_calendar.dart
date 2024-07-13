@@ -19,14 +19,20 @@ class MoodTrackerCalendar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedMonth = ref.watch(selectedMonthProvider);
 
-    return Column(
-      children: [
-        _buildHeader(selectedMonth, ref),
-        const Gap(Sizes.size16),
-        Expanded(
-          child: _buildCalendar(context, selectedMonth),
-        )
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: Sizes.size18,
+        vertical: Sizes.size16,
+      ),
+      child: Column(
+        children: [
+          _buildHeader(selectedMonth, ref),
+          const Gap(Sizes.size16),
+          Expanded(
+            child: _buildCalendar(context, selectedMonth),
+          )
+        ],
+      ),
     );
   }
 
